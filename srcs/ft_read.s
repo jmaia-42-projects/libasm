@@ -5,16 +5,16 @@ section .text
 ; ssize_t read(int fd, void *buf, size_t count);
 ; rax     ft_read(rdi fd, rsi buf, rdx count);
 ft_read:
-	mov rax, 0				; Set called syscall to read. rdi rsi and rdx are already set
-	syscall					; Call read
-	test rax, rax			; If rax is positive
-	jns end					; Then, jump to the end of the function
-	call ft_abs				; Get absolute value of return code
-	push rax				; Save value of error code
-	call __errno_location	; Get pointer to errno
-	pop rdi					; Get value of error code
-	mov [rax], rdi			; Set error code to errno
-	mov rax, -1				; Set return value to -1
+	mov rax, 0						; Set called syscall to read. rdi rsi and rdx are already set
+	syscall							; Call read
+	test rax, rax					; If rax is positive
+	jns end							; Then, jump to the end of the function
+	call ft_abs						; Get absolute value of return code
+	push rax						; Save value of error code
+	call __errno_location WRT ..plt	; Get pointer to errno
+	pop rdi							; Get value of error code
+	mov [rax], edi					; Set error code to errno
+	mov rax, -1						; Set return value to -1
 end:
 	ret
 

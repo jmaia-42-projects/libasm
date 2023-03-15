@@ -5,16 +5,16 @@ section .text
 ; ssize_t ft_write(int fd, const void *buf, size_t count);
 ; rax     ft_write(rdi fd, rsi buf, rdx count);
 ft_write:
-	mov rax, 1				; Set called syscall to write. rdi rsi and rdx are already set
-	syscall					; Call write
-	test rax, rax			; If rax is positive
-	jns end					; Then, jump to the end of the function
-	call ft_abs				; Get absolute value of return code
-	push rax				; Save value of error code
-	call __errno_location	; Get pointer to errno
-	pop rdi					; Get value of error code
-	mov [rax], rdi			; Set error code to errno
-	mov rax, -1				; Set return value to -1
+	mov rax, 1						; Set called syscall to write. rdi rsi and rdx are already set
+	syscall							; Call write
+	test rax, rax					; If rax is positive
+	jns end							; Then, jump to the end of the function
+	call ft_abs						; Get absolute value of return code
+	push rax						; Save value of error code
+	call __errno_location WRT ..plt	; Get pointer to errno
+	pop rdi							; Get value of error code
+	mov [rax], rdi					; Set error code to errno
+	mov rax, -1						; Set return value to -1
 end:
 	ret
 

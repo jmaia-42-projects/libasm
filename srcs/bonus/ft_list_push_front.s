@@ -25,7 +25,7 @@ ft_list_push_front:
         push rdi                        ; Save begin_list pointer
         push rsi                        ; Save data pointer
         mov rdi, list_size              ; Set 1st argument of malloc to struct size
-        call malloc                     ; Call malloc
+        call malloc WRT ..plt           ; Call malloc
         pop rsi                         ; Restore data pointer
         pop rdi                         ; Restore begin_list pointer
         cmp rax, 0                      ; If malloc returned null

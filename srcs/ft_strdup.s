@@ -11,7 +11,7 @@ ft_strdup:
 	call ft_strlen			; Call ft_strlen on given argument
 	mov rdi, rax			; Copy len of s to rdi
 	inc rdi					; Add one to len, to get size with NUL character
-	call malloc				; Malloc data
+	call malloc WRT ..plt	; Malloc data
 	cmp rax, 0				; If rax is NULL
 	jne fill				; Then, jump to the end of the function
 
