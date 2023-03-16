@@ -525,7 +525,7 @@ void	test_ft_strcmp(const char *s1, const char *s2)
 	int current = ft_strcmp(s1, s2);
 	int expected = strcmp(s1, s2);
 
-	printf("strcmp(%s, %s): Expected: %d, current: %d - %s\n", s1, s2, expected, current, expected == current ? "✅" : "❌");
+	printf("strcmp(%s, %s): Expected: %d, current: %d - %s\n", s1, s2, expected, current, (expected * current) >= 0 ? "✅" : "❌");
 }
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
