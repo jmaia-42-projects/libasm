@@ -1,4 +1,5 @@
 NAME		= libasm.a
+NAME_BONUS	= libasm_bonus.a
 
 ASMC		= nasm
 ASMFLAGS	= -felf64
@@ -24,13 +25,15 @@ clean:
 	rm -rf build/
 
 fclean:	clean
-	rm -f libasm.a
+	rm -f $(NAME) $(NAME_BONUS)
 
 re	:	fclean all
 
-bonus	: $(NAME) $(OBJS_BONUS)
-	ar r $(NAME) $(OBJS_BONUS)
+bonus	: $(NAME_BONUS)
 
+$(NAME_BONUS)	: $(NAME) $(OBJS_BONUS)
+	cp $(NAME) $(NAME_BONUS)
+	ar r $(NAME_BONUS) $(OBJS_BONUS)
 
 build/%.o	:	srcs/%.s
 	@if [ ! -d $(dir $@) ]; then\
