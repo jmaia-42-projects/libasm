@@ -294,9 +294,83 @@ int	main(void)
 			}
 		}
 
+		puts("-- Next test -- ");
+
 		{
 			t_list	*head;
 			t_list	*cur;
+
+			ft_list_sort(&head, &ft_strcmp);
+			cur = head;
+			while (cur)
+			{
+				printf("%s\n", (char *) cur->data);
+				cur = cur->next;
+			}
+		}
+
+		puts("-- Next test -- ");
+
+		{
+			t_list	*head = NULL;
+			t_list	*cur;
+
+			ft_list_push_front(&head, "Youpi");
+			ft_list_push_front(&head, "Genial");
+
+			ft_list_sort(&head, &ft_strcmp);
+			cur = head;
+			while (cur)
+			{
+				printf("%s\n", (char *) cur->data);
+				cur = cur->next;
+			}
+		}
+
+		puts("-- Next test -- ");
+
+		{
+			t_list	*head = NULL;
+			t_list	*cur;
+
+			ft_list_push_front(&head, "Genial");
+			ft_list_push_front(&head, "Youpi");
+
+			ft_list_sort(&head, &ft_strcmp);
+			cur = head;
+			while (cur)
+			{
+				printf("%s\n", (char *) cur->data);
+				cur = cur->next;
+			}
+		}
+
+		puts("-- Next test -- ");
+
+		{
+			t_list	*head = NULL;
+			t_list	*cur;
+
+			ft_list_push_front(&head, "Genial");
+
+			ft_list_sort(&head, &ft_strcmp);
+			cur = head;
+			while (cur)
+			{
+				printf("%s\n", (char *) cur->data);
+				cur = cur->next;
+			}
+		}
+
+		puts("-- Next test -- ");
+
+		{
+			t_list	*head = NULL;
+			t_list	*cur;
+
+			ft_list_push_front(&head, "Genial");
+			ft_list_push_front(&head, "Youpi");
+			ft_list_push_front(&head, "Superbe");
 
 			ft_list_sort(&head, &ft_strcmp);
 			cur = head;
