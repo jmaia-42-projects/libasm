@@ -426,6 +426,8 @@ int	main(void)
 			ft_lstclear(&head, NULL);
 		}
 
+		puts("-- Next test -- ");
+
 		{
 			t_list	*head = NULL;
 			t_list	*cur;
@@ -439,6 +441,8 @@ int	main(void)
 			}
 			ft_lstclear(&head, NULL);
 		}
+
+		puts("-- Next test -- ");
 
 		{
 			t_list	*head = NULL;
@@ -460,6 +464,8 @@ int	main(void)
 			}
 			ft_lstclear(&head, NULL);
 		}
+
+		puts("-- Next test -- ");
 
 		{
 			t_list	*head = NULL;
