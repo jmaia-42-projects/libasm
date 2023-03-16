@@ -26,6 +26,7 @@ void	mock_free();
 void	test_ft_strlen(const char *s);
 void	test_ft_strcpy(char *dest, size_t dest_size, const char *src);
 void	test_ft_strcmp(const char *s1, const char *s2);
+void	ft_lstclear(t_list **lst, void (*del)(void *));
 
 enum tests
 {
@@ -199,11 +200,22 @@ int	main(void)
 	{
 		puts(" --- Testing ft_strdup ---\n");
 
-		printf("Should print `pouet`: %s\n", ft_strdup("pouet"));
-		printf("Should print ``: %s\n", ft_strdup(""));
-		printf("Should print `a`: %s\n", ft_strdup("a"));
-		printf("Should print `ab`: %s\n", ft_strdup("ab"));
-		printf("Should print `ceci est un tres long texte`: %s\n", ft_strdup("ceci est un tres long texte"));
+		char	*str;
+		str = ft_strdup("pouet");
+		printf("Should print `pouet`: %s\n", str);
+		free(str);
+		str = ft_strdup("");
+		printf("Should print ``: %s\n", str);
+		free(str);
+		str = ft_strdup("a");
+		printf("Should print `a`: %s\n", str);
+		free(str);
+		str = ft_strdup("ab");
+		printf("Should print `ab`: %s\n", str);
+		free(str);
+		str = ft_strdup("ceci est un tres long texte");
+		printf("Should print `ceci est un tres long texte`: %s\n", str);
+		free(str);
 	}
 
 	if (tests & FT_ATOI_BASE)
@@ -250,6 +262,7 @@ int	main(void)
 			printf("%s\n", (char *) cur->data);
 			cur = cur->next;
 		}
+		ft_lstclear(&head, NULL);
 	}
 
 	if (tests & FT_LIST_SIZE)
@@ -270,6 +283,7 @@ int	main(void)
 		printf("%d\n", ft_list_size(head));
 		ft_list_push_front(&head, "SUPERBE");
 		printf("%d\n", ft_list_size(head));
+		ft_lstclear(&head, NULL);
 	}
 
 	if (tests & FT_LIST_SORT)
@@ -292,6 +306,7 @@ int	main(void)
 				printf("%s\n", (char *) cur->data);
 				cur = cur->next;
 			}
+			ft_lstclear(&head, NULL);
 		}
 
 		puts("-- Next test -- ");
@@ -307,6 +322,7 @@ int	main(void)
 				printf("%s\n", (char *) cur->data);
 				cur = cur->next;
 			}
+			ft_lstclear(&head, NULL);
 		}
 
 		puts("-- Next test -- ");
@@ -325,6 +341,7 @@ int	main(void)
 				printf("%s\n", (char *) cur->data);
 				cur = cur->next;
 			}
+			ft_lstclear(&head, NULL);
 		}
 
 		puts("-- Next test -- ");
@@ -343,6 +360,7 @@ int	main(void)
 				printf("%s\n", (char *) cur->data);
 				cur = cur->next;
 			}
+			ft_lstclear(&head, NULL);
 		}
 
 		puts("-- Next test -- ");
@@ -360,6 +378,7 @@ int	main(void)
 				printf("%s\n", (char *) cur->data);
 				cur = cur->next;
 			}
+			ft_lstclear(&head, NULL);
 		}
 
 		puts("-- Next test -- ");
@@ -379,6 +398,7 @@ int	main(void)
 				printf("%s\n", (char *) cur->data);
 				cur = cur->next;
 			}
+			ft_lstclear(&head, NULL);
 		}
 	}
 
@@ -403,6 +423,7 @@ int	main(void)
 				printf("%s\n", (char *) cur->data);
 				cur = cur->next;
 			}
+			ft_lstclear(&head, NULL);
 		}
 
 		{
@@ -416,6 +437,7 @@ int	main(void)
 				printf("%s\n", (char *) cur->data);
 				cur = cur->next;
 			}
+			ft_lstclear(&head, NULL);
 		}
 
 		{
@@ -436,6 +458,28 @@ int	main(void)
 				printf("%s\n", (char *) cur->data);
 				cur = cur->next;
 			}
+			ft_lstclear(&head, NULL);
+		}
+
+		{
+			t_list	*head = NULL;
+			t_list	*cur;
+
+			ft_list_push_front(&head, "Youpi");
+			ft_list_push_front(&head, "Genial");
+			ft_list_push_front(&head, "");
+			ft_list_push_front(&head, "TOP");
+			ft_list_push_front(&head, "SUPERBE");
+			ft_list_push_front(&head, "GENIAL");
+			ft_list_push_front(&head, "Youpi");
+			cur = head;
+			ft_list_remove_if(&head, "Ge", &ft_strcmp, NULL);
+			while (cur)
+			{
+				printf("%s\n", (char *) cur->data);
+				cur = cur->next;
+			}
+			ft_lstclear(&head, NULL);
 		}
 	}
 }
@@ -465,6 +509,9 @@ void	test_ft_strcpy(char *dest, size_t dest_size, const char *src)
 	char *std_returned_dest = strcpy(std_dest, src);
 
 	printf("strcpy(%s) = %s, ft_strcpy(%s) = %s - %s - %s\n", src, std_dest, src, ft_dest, strcmp(std_dest, ft_dest) == 0 ? "✅" : "❌", (ft_returned_dest == ft_dest) == (std_returned_dest == std_dest) ? "✅" : "❌");
+
+	free(ft_dest);
+	free(std_dest);
 }
 
 void	test_ft_strcmp(const char *s1, const char *s2)
@@ -473,4 +520,16 @@ void	test_ft_strcmp(const char *s1, const char *s2)
 	int expected = strcmp(s1, s2);
 
 	printf("strcmp(%s, %s): Expected: %d, current: %d - %s\n", s1, s2, expected, current, expected == current ? "✅" : "❌");
+}
+
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	if (lst == 0 || *lst == 0)
+		return ;
+	if ((*lst)->next != 0)
+		ft_lstclear(&(*lst)->next, del);
+	if (del)
+		del((*lst)->data);
+	free(*lst);
+	*lst = 0;
 }
