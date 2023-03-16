@@ -409,15 +409,15 @@ int	main(void)
 			t_list	*head = NULL;
 			t_list	*cur;
 
-			ft_list_push_front(&head, "Youpi");
+			ft_list_push_front(&head, "Youpi1");
 			ft_list_push_front(&head, "Genial");
 			ft_list_push_front(&head, "");
 			ft_list_push_front(&head, "TOP");
 			ft_list_push_front(&head, "SUPERBE");
 			ft_list_push_front(&head, "GENIAL");
-			ft_list_push_front(&head, "Youpi");
-			cur = head;
+			ft_list_push_front(&head, "Youpi2");
 			ft_list_remove_if(&head, "Genial", &ft_strcmp, &mock_free);
+			cur = head;
 			while (cur)
 			{
 				printf("%s\n", (char *) cur->data);
@@ -432,8 +432,8 @@ int	main(void)
 			t_list	*head = NULL;
 			t_list	*cur;
 
-			cur = head;
 			ft_list_remove_if(&head, "Genial", &ft_strcmp, &mock_free);
+			cur = head;
 			while (cur)
 			{
 				printf("%s\n", (char *) cur->data);
@@ -455,8 +455,8 @@ int	main(void)
 			ft_list_push_front(&head, "SUPERBE");
 			ft_list_push_front(&head, "GENIAL");
 			ft_list_push_front(&head, "Youpi");
-			cur = head;
 			ft_list_remove_if(&head, "Ge", &ft_strcmp, &mock_free);
+			cur = head;
 			while (cur)
 			{
 				printf("%s\n", (char *) cur->data);
@@ -478,8 +478,8 @@ int	main(void)
 			ft_list_push_front(&head, "SUPERBE");
 			ft_list_push_front(&head, "GENIAL");
 			ft_list_push_front(&head, "Youpi");
-			cur = head;
 			ft_list_remove_if(&head, "Ge", &ft_strcmp, NULL);
+			cur = head;
 			while (cur)
 			{
 				printf("%s\n", (char *) cur->data);
