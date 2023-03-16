@@ -297,7 +297,7 @@ int	main(void)
 		puts("-- Next test -- ");
 
 		{
-			t_list	*head;
+			t_list	*head = NULL;
 			t_list	*cur;
 
 			ft_list_sort(&head, &ft_strcmp);
